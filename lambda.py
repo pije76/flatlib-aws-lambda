@@ -14,11 +14,11 @@ def handle(event, context):
     lat = str(event.get('lat', '')).replace('.', ':')
     lng = str(event.get('lng', '')).replace('.', ':')
 
-    # date = '1987/04/20'
-    # time = '15:30'
-    # timezone = '+01:00'
-    # lat = ''
-    # lng = ''
+    # date = "1987/04/20"
+    # time = "12:00"
+    # timezone = "+01:00"
+    # lat = "37:09024"
+    # lng = "-95:712891"
 
     time_is_good = (time != '' and timezone != '')
     place_is_good = (lat != '' and lng != '')
@@ -32,7 +32,7 @@ def handle(event, context):
         pos = [GeoPos('-60:000', '-180:000'), GeoPos('78:000', '180:000')]
     ret = []
     if len(datetime) * len(pos) == 1:
-        chart = Chart(datetime, pos, IDs=const.LIST_OBJECTS)
+        chart = Chart(datetime[0], pos[0], IDs=const.LIST_OBJECTS)
         for item in gimme_these:
             key = getattr(const, item)
             ret.append({'characteristic': key, 'sign': chart.get(key).sign, 'angle': str(chart.get(key).signlon)})
