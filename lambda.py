@@ -14,11 +14,16 @@ def handle(event, context):
     lat = event.get('lat', None)
     lng = event.get('lng', None)
 
-    # date = "1987/04/20"
+    # date = "2016/11/20"
     # time = "12:00"
     # timezone = "+01:00"
     # lat = "37:09024"
     # lng = "-95:712891"
+    # time = None
+    # timezone = None
+    # lat = None
+    # lng = None
+
 
     time_is_good = (time is not None and timezone is not None)
     place_is_good = (lat is not None and lng is not None)
@@ -29,7 +34,7 @@ def handle(event, context):
     if place_is_good:
         pos = [GeoPos(str(lat).replace('.', ':'), str(lng).replace('.', ':'))]
     else:
-        pos = [GeoPos('-60:000', '-180:000'), GeoPos('78:000', '180:000')]
+        pos = [GeoPos('-60:000', '-179:000'), GeoPos('70:000', '179:000')]
     ret = []
     if len(datetime) * len(pos) == 1:
         chart = Chart(datetime[0], pos[0], IDs=const.LIST_OBJECTS)
