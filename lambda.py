@@ -6,7 +6,7 @@ from flatlib.geopos import GeoPos
 
 def handle(event, context):
     gimme_these = ['SUN', 'MOON', 'MERCURY', 'VENUS', 'MARS', 'JUPITER', 'SATURN', 'URANUS', 'NEPTUNE', 'PLUTO',
-                   'CHIRON', 'HOUSE1', 'HOUSE2', 'HOUSE3', 'HOUSE4', 'HOUSE5', 'HOUSE6', 'HOUSE7', 'HOUSE8', 'HOUSE9',
+                   'ASC', 'CHIRON', 'HOUSE1', 'HOUSE2', 'HOUSE3', 'HOUSE4', 'HOUSE5', 'HOUSE6', 'HOUSE7', 'HOUSE8', 'HOUSE9',
                    'HOUSE10', 'HOUSE11', 'HOUSE12']
     date = str(event['date'])
     time = str(event.get('time', ''))
