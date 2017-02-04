@@ -9,10 +9,10 @@ def handle(event, context):
                    'ASC', 'CHIRON', 'HOUSE1', 'HOUSE2', 'HOUSE3', 'HOUSE4', 'HOUSE5', 'HOUSE6', 'HOUSE7', 'HOUSE8', 'HOUSE9',
                    'HOUSE10', 'HOUSE11', 'HOUSE12']
     date = str(event['date'])
-    time = str(event.get('time', ''))
-    timezone = str(event.get('timezone', ''))
-    lat = str(event.get('lat', '')).replace('.', ':')
-    lng = str(event.get('lng', '')).replace('.', ':')
+    time = event.get('time', None)
+    timezone = event.get('timezone', None)
+    lat = event.get('lat', None)
+    lng = event.get('lng', None)
 
     # date = "1987/04/20"
     # time = "12:00"
@@ -20,14 +20,14 @@ def handle(event, context):
     # lat = "37:09024"
     # lng = "-95:712891"
 
-    time_is_good = (time != '' and timezone != '')
-    place_is_good = (lat != '' and lng != '')
+    time_is_good = (time is not None and timezone is not None)
+    place_is_good = (lat is not None and lng is not None)
     if time_is_good:
-        datetime = [Datetime(date, time, timezone)]
+        datetime = [Datetime(date, str(time), str(timezone))]
     else:
         datetime = [Datetime(date, "23:59", "-12:00"), Datetime(date, "00:01", "+12:00")]
     if place_is_good:
-        pos = [GeoPos(lat, lng)]
+        pos = [GeoPos(str(lat).replace('.', ':'), str(lng).replace('.', ':'))]
     else:
         pos = [GeoPos('-60:000', '-180:000'), GeoPos('78:000', '180:000')]
     ret = []
